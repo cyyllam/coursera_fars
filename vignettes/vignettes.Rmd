@@ -1,0 +1,55 @@
+---
+title: "Introduction to Fars"
+author: "Christy Lam"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Introduction to Fars}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+This vignette describes a series of functions to use with data from the US National Highway Traffic Safety Administration's [Fatality Analysis Reporting System (FARS)](https://www.nhtsa.gov/research-data/fatality-analysis-reporting-system-fars). It is a nationwide census providing the American public yearly data regarding fatal injuries suffered in motor vehicle traffic crashes.
+
+This package contains a series of functions that when used in conjunction with each other can create tabular summaries of the FARS datasets as well as a graphical display of where accidents have taken place. This package includes datasets from 2013 to 2015, each as individual raw files.
+
+## Read a FARS file
+
+An individual FARS file contains a single year's worth of observations where each record represents one traffic case. You can read-in a single file as a tibble using the`fars_read` function.
+
+```{r, eval = FALSE}
+fars_read("accident_2013.csv.b2z")
+```
+
+
+## Create a filename
+
+Each FARS filename is made of these three components: "accident_", data year, ".csv.b2z". The `make_filename` function will create the filename simply by supplying the year of interest.
+
+## Read multiple FARS files
+
+The `fars_read_years` can be used to read multiple FARS files by supplying a vector or list of years. If that year's dataset exists, it will return a list of tibbles containing the month and year columns.
+
+## Summarise the number of accidents by month and year
+
+Use the `fars_summarize_years` to produce a crosstabulation of the number of accidents by month and year.
+```{r, eval = FALSE}
+fars_summarize_years(c(2013, 2014, 2015))
+```
+
+
+## Map Locations by state
+
+To map the locations of all accidents in a given year and state, use the `fars_map_state` function.
+
+
+
+
+
